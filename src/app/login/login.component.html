@@ -1,0 +1,43 @@
+<div id="login-page">
+    <img src="assets/images/land/header.png" class="header">
+
+    <div class="button-box">
+        <a class="login" (tap)='showLoginPop()'>登录</a>
+
+        <a class="reg"  (tap)='showRegPop()'>注册</a>
+    </div>
+
+</div>
+
+
+<div class="modal-bg" [style.display]="isPop?'block':'none'"></div>
+<div class="modal-pop" [style.display]="isPop?'block':'none'">
+    <div class="login-pop" [style.display]="isLoginPop?'block':'none'">
+        <div class="header">
+            <h3>k线账号登录</h3>
+            <a class="close" (tap)="hideLoginPop()"></a>
+        </div>
+        <div class="content">
+            <input class="phone" type="tel" placeholder="输入手机号码" [(ngModel)]='phone'>
+            <input class="password" type="password" placeholder="输入密码" [(ngModel)]='password'>
+
+            <a class="button" (tap)='loginAccount()'>登录</a>
+        </div>
+    </div>
+    <div class="reg-pop" [style.display]="isRegPop?'block':'none'">
+        <div class="header">
+            <h3>游戏注册</h3>
+            <a class="close" (tap)="hideRegPop()"></a>
+        </div>
+        <div class="content">
+            <input class="phone" type="tel" placeholder="输入手机号码" [(ngModel)]='phone'>
+            <input class="password" type="password" placeholder="输入密码" [(ngModel)]='password'>
+            <div class="code-box">
+                <input class="code" type="tel" placeholder="输入验证码" [(ngModel)]='code'>
+                <a class="code-btn" (tap)='sendSmsCode()'>{{sendSmsCountDown>0?sendSmsCountDown+'s后重发':'获取验证码'}}</a>
+            </div>
+            <input class="nickname" type="text" placeholder="输入昵称(必填)" [(ngModel)]='nickname'>
+            <a class="button" (tap)='regAccount()'>注册</a>
+        </div>
+    </div>
+</div>

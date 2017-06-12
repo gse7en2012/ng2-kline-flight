@@ -1,0 +1,47 @@
+<socket-kline-chart [socketKlineData]="socketKlineData" [style.display]="fetchDataDone?'block':'none'" *ngIf="fetchDataDone"
+  [playerList]="playerList" [isGameOver]="isGameOver" [playListGameEnd]="playListGameEnd" (KlineGamePassEvt)="parentKlineGamePassEvt($event)"
+  (KlineGameBuyEvt)='parentKlineGameBuyEvt($event)' (KlineGameSellEvt)='parentKlineGameSellEvt($event)' (KlineGameAgainEvt)='parentKlineGameAgainEvt($event)'>
+</socket-kline-chart>
+
+
+<!--<div class="test-d">{{playerListStr}}</div>-->
+
+
+
+<div class="socket-loading" *ngIf="waitingGameStart">
+  <div class="socket-loading-mask"></div>
+  <div class="socket-loading-content">
+    <p class="tips">{{pkTips}}</p>
+    <div class="status">
+      <!--<div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>-->
+      <div class="sk-wave">
+        <div class="sk-rect sk-rect1"></div>
+        <div class="sk-rect sk-rect2"></div>
+        <div class="sk-rect sk-rect3"></div>
+        <div class="sk-rect sk-rect4"></div>
+        <div class="sk-rect sk-rect5"></div>
+      </div>
+      <p>{{roomStatus}}</p>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="socket-loading" *ngIf="waitingTimeOut">
+  <div class="socket-loading-mask"></div>
+  <div class="socket-loading-content">
+    <div class="timeout-status">
+      <h3>匹配超时！</h3>
+      <p>暂未有财友应战。你可以去社区主动约战哦！</p>
+      <div>
+        <a class="timeout-btn" (click)="returnLandPage()">点击返回</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<p style="color:#fff;font-size: 30px;" [style.display]="fetchDataDone?'block':'none'">{{fetchDataDone}}!</p>-->

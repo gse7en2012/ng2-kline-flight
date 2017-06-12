@@ -1,0 +1,101 @@
+<div id="land-page">
+  <div class="download-banner" *ngIf="isShowDownloadBanner" ><img src="assets/images/land/logo.png">APP版本支持多参数、复盘、PK<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.weicaiapp.kline">马上点击下载</a></div>
+  <img src="assets/images/land/header.png" class="header">
+
+  <!--<a [routerLink]="['/test']">测试过场</a>-->
+  
+  <a class="single-game" (tap)="gotoSingleGame()"> <img src="assets/images/land/bt1.png"></a>
+
+  <a class="pk-game" (tap)="gotoSocketGame()">
+    <img src="assets/images/land/bt2.png">
+    <span class="ban">测试版</span>
+  </a>
+
+  <div class="button-box">
+    <a class="index" (tap)="getUserProfile()">成绩</a>
+    <a class="help" (tap)="showHelp()">帮助</a>
+  </div>
+
+</div>
+
+<div class="modal-bg" [style.display]="isShowProfile?'block':'none'"></div>
+<div class="modal-pop" [style.display]="isShowProfile?'block':'none'" id="modal-profile">
+  <div class="header">
+    <h3>个人主页</h3>
+    <a class="close" (tap)="closeProfile()"></a>
+  </div>
+  <div class="pre" [style.display]="!isProfileLoad?'block':'none'">
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+  <div class="content" [style.display]="isProfileLoad?'block':'none'" *ngIf="isProfileLoad">
+    <div class="profile">
+      <div class="fl">
+        <img [src]="userInfo.picture?userInfo.picture:'assets/images/avatar.png'" [class.vip]="userInfo.vip_lvl"/>
+        <p class="nickname" [class.vip]="userInfo.vip_lvl">{{userInfo.nickname}}</p>
+      </div>
+      <div class="level">
+        LV{{userInfo.lvl}}
+        <div class="level-outer">
+          <div class="level-inner" [style.width.%]='userInfo.lvlWidth'></div>
+
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <li>
+        <div class="item">PK场</div>
+        <div class="item">胜率<span>{{userInfo.pk_win_count+userInfo.pk_fail_count==0?'0':(userInfo.pk_win_count/(userInfo.pk_win_count+userInfo.pk_fail_count)*100).toFixed(2)}}%</span></div>
+        <div class="item">胜<span>{{userInfo.pk_win_count}}</span></div>
+        <div class="item">负<span>{{userInfo.pk_fail_count}}</span></div>
+      </li>
+      <li>
+        <div class="item">练习场</div>
+        <div class="item">胜率<span>{{userInfo.single_win_count+userInfo.single_fail_count==0?'0':(userInfo.single_win_count/(userInfo.single_win_count+userInfo.single_fail_count)*100).toFixed(2)}}%</span></div>
+        <div class="item">胜<span>{{userInfo.single_win_count}}</span></div>
+        <div class="item">负<span>{{userInfo.single_fail_count}}</span></div>
+      </li>
+      <li>
+        <div class="item"><img src='assets/images/land/coin.png'><span>{{userInfo.coin}}</span></div>
+        <div class="item"><img src='assets/images/land/m1.png'><span>{{userInfo.medal_gold}}</span></div>
+        <div class="item"><img src='assets/images/land/m2.png'><span>{{userInfo.medal_silver}}</span></div>
+        <div class="item"><img src='assets/images/land/m3.png'><span>{{userInfo.medal_copper}}</span></div>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+
+<div class="modal-bg" [style.display]="isShowHelp?'block':'none'"></div>
+<div class="modal-pop" id="modal-help" [style.display]="isShowHelp?'block':'none'">
+  <div class="header">
+    <h3>帮助</h3>
+    <a class="close" (tap)="closeHelp()"></a>
+  </div>
+  <div class="content">
+    <h3>游戏玩法：</h3>
+    <p>太容易上手了，直接开始好了。 </p>
+    <h3>账号密码：</h3>
+    <p>【独立账号】K线决战有独立的账号密码，可以登录APP端。账号就是手机号。</p>
+    <h3>操作说明：</h3>
+    <p>【数据】K线数据是历史真实发生的。从2000年至今，随机一只沪深股票的200天数据 <br> 【均线】日均线分别是5、10、20天 【指标】蜡烛图、均线、交易量、MACD（APP版）、KDJ（APP版）、BOLL（APP版）<br>      【移动（APP版）】K线图可以放大、缩小、左右横移<br> 【复盘（APP版）】每盘结束后都可以复盘，看自己和对手的操作，总结提升。
+    </p>
+    <h3> 玩法说明：</h3>
+    <p>【练习场】自己玩，时限较长，慢慢练习用。（操作时间太短成绩无效） <br>【PK场（APP版）】2-4人实时PK同一支股票，时限较短，比拼最终总盈利<br> 【乱斗场（APP版）】2-4人实时PK不同的股票。你盈利会扣除对手金币，你亏损会为对手增加金币。当金币为0时，被KO
+    </p>
+    <h3>货币说明：</h3>
+    <p> 【金币】参加PK场、战斗场时使用。可通过签到、购买、练习、PK、乱斗获得</p>
+    <h3>榜单说明：</h3>
+    <p>【PK周榜（APP版）】每周五清零，按胜利场数排名，各周赛前三甲可获永久奖牌 <br>【乱斗周榜（APP版）】每周五清零，按赢取金币排名。 <br>【金币榜（APP版）】按金币余额排名 </p>
+
+    <h3>经验与等级：</h3>
+    <p> 【Lv等级】经验积累越多，等级越高。赢取PK场积累经验较快。</p>
+    <h3>K线约战Q群：</h3>
+    <p> 【进Q群（APP版）】进入设置、加入Q群、群里约战 【Q群内容（APP版）】还有规则不懂的，需要提反馈的、都可以进Q群聊。 商务合作 请发邮件到2468859955@qq.com</p>
+  </div>
+
+</div>

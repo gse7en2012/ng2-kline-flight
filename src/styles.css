@@ -1,1 +1,695 @@
-/* You can add global styles to this file, and also import other style files */
+* { margin: 0; padding: 0; }
+
+/*chart-page*/
+
+body{
+    background: #000;
+    font-family: 'Helvetica';
+}
+
+#canvas {
+    /*display: none;*/
+    background: #041117;
+    position: absolute;
+    z-index: 1;
+    top: 95px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+#loading{
+    position: absolute;
+    width: 100%;
+    color: #559aba;
+    top: 40%;
+    text-align: center;
+    transform: translateY(-50%);
+    font-size: 20px;
+    display: none;
+}
+
+
+
+.game-banner{
+    background: #041117;
+    width: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 100;
+    height:60px;
+}
+.game-banner .fl{
+    float: left;
+}
+.game-banner .avatar{
+    float: left;
+    width: 50px;
+    margin-top: 5px;
+    margin-left: 10px;
+    height: 50px;
+    border-radius: 5px;
+}
+.game-banner .name{
+    color: #559aba;
+    font-size: 16px;
+    margin-left: 10px;
+    float: left;
+    line-height: 40px;
+}
+.game-banner .level{
+    color: #fff;
+    font-size: 16px;
+    position: absolute;
+    left: 70px;
+    top: 35px;
+}
+.game-banner .earn-box{
+    color: #9c9c9c;
+    font-size: 16px;
+    position: absolute;
+    left: 55%;
+    margin-top: 10px;
+}
+
+
+
+#earn-show,#hold-earn-show{
+    color: #949494;
+    z-index: 999;
+}
+#earn-show.red,#hold-earn-show.red{
+    color: #e93d47;
+}
+#earn-show.green,#hold-earn-show.green{
+    color: #03b57f;
+}
+
+.game-banner .return{
+   position: absolute;
+    right: 2%;
+    top: 20%;
+    width: 25px;
+    height: 25px;
+    background: url(assets/images/chart/return.png) no-repeat 0 0;
+    background-size: 100%;
+}
+
+.game-info{
+   position: absolute;
+    top: 65px;
+    height: 24px;
+    font-size: 14px;
+    width: 100%;
+    left: 0;
+    line-height: 24px;
+    padding-left: 10px;
+    background: #041117;
+    color: #949494;
+}
+
+.game-bottom{
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    height:50px;
+    left: 0;
+    background: #041117;
+}
+
+.game-bottom .info{
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    color: #949494;
+    width: 180px;
+}
+.game-bottom .info img{
+    width: 30px;
+    -webkit-transform: translateY(22%);
+    transform: translateY(22%);
+    margin-right: 5px;
+}
+.game-bottom .info span{
+    font-size: 16px;
+    display: inline-block;
+}
+#time{
+    margin-right: 15px;
+}
+
+.btn {
+    position: absolute;
+    width: 80px;
+    height: 38px;
+    background: #142f3b;
+    color: #559aba;
+    font-size: 20px;
+    text-align: center;
+    right: 10px;
+    bottom: 6px;
+    z-index: 999;
+    user-select: none;
+    cursor: pointer;
+}
+.btn p{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#sell{
+    left:10px;display: none;color: #559aba;
+}
+#buy{
+    left:10px;color:#559aba;
+}
+#pass{
+    color: #949494;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  margin: 100px auto 20px;
+}
+ 
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #559aba;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+   
+  -webkit-animation: bounce 2.0s infinite ease-in-out;
+  animation: bounce 2.0s infinite ease-in-out;
+}
+ 
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+@-webkit-keyframes bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+ 
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+.sk-cube-grid {
+  width: 70px;
+  height: 70px;
+  margin: 40px auto;
+  /*
+   * Spinner positions
+   * 1 2 3
+   * 4 5 6
+   * 7 8 9
+   */ }
+  .sk-cube-grid .sk-cube {
+    width: 33.33%;
+    height: 33.33%;
+    background-color: #559aba;
+    float: left;
+    -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+            animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; }
+  .sk-cube-grid .sk-cube1 {
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s; }
+  .sk-cube-grid .sk-cube2 {
+    -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s; }
+  .sk-cube-grid .sk-cube3 {
+    -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s; }
+  .sk-cube-grid .sk-cube4 {
+    -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s; }
+  .sk-cube-grid .sk-cube5 {
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s; }
+  .sk-cube-grid .sk-cube6 {
+    -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s; }
+  .sk-cube-grid .sk-cube7 {
+    -webkit-animation-delay: 0.0s;
+            animation-delay: 0.0s; }
+  .sk-cube-grid .sk-cube8 {
+    -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s; }
+  .sk-cube-grid .sk-cube9 {
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1); }
+  35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1); } }
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1); }
+  35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1); } }
+
+
+
+
+
+@media screen and (max-width: 480px) {
+   
+    .game-bottom .info{
+        top: 8px;
+        width: 150px;
+    }
+    .game-bottom .info img {
+        width: 25px;
+    }
+}
+
+@media screen and (max-width: 360px){
+    .game-bottom .info{
+        top: 12px;
+        width: 140px;
+    }
+    .game-bottom .info img {
+        width: 20px;
+    }
+    .btn{
+        width: 60px;
+        font-size: 18px;
+    }
+   
+    .game-banner .name,.game-banner .level,.game-banner .earn-box{
+        font-size: 14px;
+
+    }
+    .game-banner .return{
+        top:26%;
+        width: 20px;
+        height:20px;
+    }
+}
+
+
+.sk-wave {
+  margin: 40px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px; }
+  .sk-wave .sk-rect {
+    background-color: #333;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    -webkit-animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
+            animation: sk-waveStretchDelay 1.2s infinite ease-in-out; }
+  .sk-wave .sk-rect1 {
+    -webkit-animation-delay: -1.2s;
+            animation-delay: -1.2s; }
+  .sk-wave .sk-rect2 {
+    -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s; }
+  .sk-wave .sk-rect3 {
+    -webkit-animation-delay: -1s;
+            animation-delay: -1s; }
+  .sk-wave .sk-rect4 {
+    -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s; }
+  .sk-wave .sk-rect5 {
+    -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s; }
+@-webkit-keyframes sk-waveStretchDelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4);
+            transform: scaleY(0.4); }
+  20% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1); } }
+@keyframes sk-waveStretchDelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4);
+            transform: scaleY(0.4); }
+  20% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1); } }
+
+
+
+.modal-bg{
+    z-index: 9999;
+    background: rgba(0,0,0,.85);
+    position: fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    height:100%
+}
+
+.modal-pop{
+    z-index: 10000;
+    position: absolute;
+    width: 90%;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background: #081a23;
+}
+.modal-pop .header {
+    color: #4687ad;
+    font-size: 20px;
+    text-align: center;
+    background: url(assets/images/chart/bg.png) ;
+    background-size:15% ;
+    border-bottom: 4px solid #4588ab;
+}
+.modal-pop .header h3{
+    color: #4687ad;
+    font-size: 24px;
+    line-height: 2;
+}
+.modal-pop .content{
+    color: #949494;
+    padding: 10px;
+}
+.modal-pop .summary{
+    font-size: 14px;
+}
+.modal-pop .summary p{
+    line-height: 1.5;
+}
+
+.modal-pop table{
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    margin-bottom: 4%;
+}
+.modal-pop table td{
+    text-align: center;
+    background: #041117;
+    line-height: 2;
+    font-size: 14px;
+}
+.modal-pop .button{
+    display: block;
+    color: #9f9f9f;
+    background: #142f3b;
+    line-height: 2;
+    font-size: 20px;
+    border-radius: 5px;
+    width: 100px;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+}
+.modal-pop .close{
+    width: 20px;
+    height: 20px;
+    background: url(assets/images/chart/close.png) no-repeat;
+    right: 10px;
+    top: 10px;
+    position: absolute;
+    background-size: 100%;
+}
+.modal-pop input{
+    display: block;
+    background: #041117;
+    border: 1px solid #559aba;
+    width: 96%;
+    margin: 15px auto;
+    height: 28px;
+    font-size: 16px;
+    line-height: 28px;
+    padding: 5px;
+    color:#949494;
+}
+
+/*Land page*/
+
+#land-page,#login-page{
+    background: #041117 url(assets/images/land/bg.jpg) center 100% no-repeat;
+    background-size:100%; 
+    position: absolute;
+    width: 100%;
+    height:100%;
+    left:0;
+    top:0;
+}
+#land-page .header,#login-page .header{
+    width: 80%;
+    display: block;
+    margin: 50px auto;
+}
+
+#land-page .single-game img,#land-page .pk-game img{
+    width: 65%;
+    display: block;
+    margin: 30px auto;
+}
+#land-page .pk-game{
+    position: relative;
+    display: block;
+}
+/*#land-page .pk-game img{
+    opacity: .5;
+}*/
+#land-page .pk-game .ban{
+    font-size:12px;
+    position: absolute;
+    padding: 3px;
+    right:17.5%;
+    top:0;
+    color:#fff;
+    background: #559aba;
+}
+
+#land-page .button-box{
+    text-align: center;
+}
+#land-page .button-box a{
+    width: 30%;
+    height: 40px;
+    display: inline-block;
+    margin-right: 5%;
+    color: #949494;
+    line-height: 45px;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+}
+#land-page .index{
+    background:url(assets/images/land/but1.png) no-repeat 0 0;
+    background-size:100% 40px; 
+}
+#land-page .button-box .help{
+    background:url(assets/images/land/but2.png) no-repeat 0 0;
+    background-size:100% 40px; 
+    margin-right: 0;
+    line-height: 40px;
+}
+
+/*Login page*/
+#login-page .button-box{
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-20%);
+}
+#login-page .button-box a{
+    width: 60%;
+    height: 70px;
+    margin: 30px auto;
+    display: block;
+    color: #949494;
+    line-height: 70px;
+    font-size: 28px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#login-page .login{
+    background:url(assets/images/land/but1.png) no-repeat 0 0;
+    background-size:100% 70px; 
+    margin-top: 50px;
+}
+#login-page .button-box .reg{
+    background:url(assets/images/land/but2.png) no-repeat 0 0;
+    background-size:100% 70px; 
+    line-height: 70px;
+}
+.reg-pop .code-box input{
+    float: left;
+    width: 60%;
+    margin-top: 0;
+}
+.reg-pop .code-box .code-btn{
+    float: right;
+    width: 34%;
+    text-align: center;
+    padding: 5px 0;
+    height: 30px;
+    line-height: 30px;
+    background: #142f3b;
+}
+
+
+#modal-profile .spinner{
+    margin: 60px auto;
+    width: 60px;
+    height: 60px;
+}
+#modal-profile .profile{
+  overflow: hidden;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #122733;
+    margin-bottom: 10px;
+}
+#modal-profile .fl{
+    float: left;
+    width: 59%;
+}
+#modal-profile .profile img{
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#modal-profile .profile img.vip{
+    border: 2px solid #ffd631;
+}
+#modal-profile .profile .nickname{
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    border: 1px solid #559aba;
+    margin-left: 45px;
+    padding-left: 5px;
+    margin-top: 6px;
+}
+#modal-profile .profile .nickname.vip{
+    color:#ffd631;
+}
+#modal-profile .level{
+    float: right;
+    width: 40%;
+    margin-top: 13px;
+    font-size: 14px;
+    text-align: right;
+}
+#modal-profile .level-outer{
+    float: right;
+    width: 70%;
+    height: 16px;
+    border: 2px solid #559aba;
+    box-sizing: border-box;
+    position: relative;
+    margin-left: 5px;
+}
+#modal-profile .level-inner{
+    position: absolute;
+    height: 12px;
+    width: 50%;
+    left: 0px;
+    background: #2f5a6e;
+}
+#modal-profile ul{
+    list-style: none;
+}
+#modal-profile li{
+   overflow: hidden;
+    padding: 5px 10px;
+    background: #041117;
+    margin-bottom: 6px;
+    font-size: 14px;
+    border-radius: 6px;
+    color: #76797a;
+}
+#modal-profile li .item{
+    float:left;
+    width: 20%;
+}
+#modal-profile li span{
+    color: #fff;
+    margin-left: 2px;
+    font-weight: normal;
+}
+#modal-profile li .item:first-child{
+    font-weight: bold;
+    width: 30%;
+}
+#modal-profile li .item:nth-child(2){
+    width:30%;
+}
+
+#modal-profile li .item img{
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+}
+
+
+#modal-help .content{
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 14px;
+    
+}
+#modal-help .content h3{
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 10px;
+    color: #4687ad;
+}
+#modal-help .content p{
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.download-banner{
+   height: 36px;
+    background: #559aba;
+    color: #eee;
+    font-size: 14px;
+    line-height: 36px;
+}
+.download-banner img{
+    width: 28px;
+    height: 28px;
+    float: left;
+    margin: 4px 6px;
+}
+.download-banner a{
+    margin-left: 4px;
+    font-weight: bold;
+    color: #222;
+}

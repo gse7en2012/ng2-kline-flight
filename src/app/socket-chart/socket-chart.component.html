@@ -1,0 +1,87 @@
+<div class="game-banner">
+
+  <img [src]="userInfo.picture?userInfo.picture:'assets/images/avatar.png'" class="avatar">
+
+  <p class="name">{{userInfo.nickname}}</p>
+
+
+  <p class="earn-box">
+    总计盈利：<span id="earn-show" [style.color]="earn.indexOf('-')==-1?'#e93d47':'#03b57f'">{{earn}}</span>
+    <br>持仓盈利：<span id="hold-earn-show" [style.color]="holdEarn.indexOf('-')==-1?'#e93d47':'#03b57f'">{{holdEarn}}</span></p>
+
+  <p class="level">lv{{userInfo.lvl}}</p>
+
+  <a class="return" (click)="returnLandPage()"></a>
+</div>
+
+<div class="game-other-players-box">
+
+  <div class="players" *ngFor="let player of playerList">
+    <img [src]="player.picture?player.picture:'assets/images/avatar.png'" class="avatar">
+    <div class="box">
+      <p class="rank">{{player.nickname}}</p>
+      <p class="earn" [style.color]="player.earn_roi.indexOf('-')==-1 ? '#e93d47' : '#03b57f'">{{player.earn_roi}}</p>
+    </div>
+  </div>
+ 
+</div>
+
+
+
+
+<canvas #socketCanvas [width]="canvasWidth" [height]="canvasHeight" width="300" height="500" id="socketCanvas"></canvas>
+
+<div class="game-bottom">
+  <div class="btn" id="pass" (tap)="passEvt()">
+    <p>过</p>
+  </div>
+  <div class="btn" id="buy" (tap)="buyEvt()" [style.display]="!tradeInfo.isTrading ? 'block' : 'none'">
+    <p>买入</p>
+  </div>
+  <div class="btn" id="sell" [style.display]="tradeInfo.isTrading ? 'block' : 'none'" (tap)="sellEvt()">
+    <p>卖出</p>
+  </div>
+
+  <div class="info">
+    <img src="assets/images/chart/circle.png" class="c"><span id="time">{{remindTimeShow}}</span>
+    <img src="assets/images/chart/line.png" class="c"><span id="line">{{remindLine}}</span>
+  </div>
+</div>
+
+
+
+<div class="modal-bg" [style.display]="isGameOver?'block':'none'"></div>
+<div class="modal-pop" [style.display]="isGameOver?'block':'none'">
+    <div class="header">
+        <h3>比赛结果</h3>
+        <a class="close" routerLink="/land"></a>
+    </div>
+    <div class="content">
+        <div class="summary">
+            <p>比赛股票：{{symbolName}}</p>
+            <p>数据时间：{{symbolTime}}</p>
+            <p>同期涨幅：<span [style.color]="symbolEarn.indexOf('-')==-1?'#e93d47':'#03b57f'">{{symbolEarn}}</span></p>
+        </div>
+
+        <table>
+            <tr>
+                <th width="15%">排名</th>
+                <th>玩家</th>
+                <th width="15%">等级</th>
+                <th width="15%">收益</th>
+                <th width="12%">金币</th>
+                <th width="12%">经验</th>
+            </tr>
+            <tr *ngFor="let p of playListGameEnd" >
+                <td>{{p.rank}}</td>
+                <td>{{p.nickname}}</td>
+                <td>LV{{p.lvl}}</td>
+                <td><span [style.color]="p.earn_roi.indexOf('-')==-1?'#e93d47':'#03b57f'">{{p.earn_roi}}</span></td>
+                <td>{{p.earn_coin}}</td>
+                <td>{{p.earn_exp}}</td>
+            </tr>
+        </table>
+
+        <a class="button" (click)="emitAgain()">再来一局</a>
+    </div>
+</div>
